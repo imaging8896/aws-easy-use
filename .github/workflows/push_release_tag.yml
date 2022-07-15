@@ -36,3 +36,8 @@ jobs:
         files:       'dist/*' # Separate by ';'
         repo-token:  ${{ secrets.GITHUB_TOKEN }}
         release-tag: ${{ github.ref_name }}
+    - name: Upload pypi
+      env:
+        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+      run: twine upload --verbose dist/*
