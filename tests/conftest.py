@@ -1,2 +1,2 @@
-from .fixture_s3 import *
-from .fixture_test_file import *
+from .mock_s3 import *
+from .data_test_file import *
