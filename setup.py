@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name = "aws-easy-use",
-    version = "0.0.2",
+    version = "0.0.3",
     author = "Ted Chen",
     author_email = "imaging8896@gmail.com",
     description = "AWS boto3 wrapper. Make it easier and intuitive to use.",
