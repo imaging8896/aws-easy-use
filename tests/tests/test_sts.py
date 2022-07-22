@@ -1,5 +1,3 @@
-import boto3
-
 from moto import mock_sts
 from hamcrest import assert_that, is_, has_entries, ends_with
 
