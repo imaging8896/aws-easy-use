@@ -20,7 +20,13 @@ setup(
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     license = "MIT",
-    url = "https://github.com/imaging8896/aws-tool",
+    url = "https://github.com/imaging8896/aws-easy-use",
+    project_urls={
+        # 'Documentation': 'https://packaging.python.org/tutorials/distributing-packages/',
+        # 'Funding': 'https://donate.pypi.org',
+        'Source': "https://github.com/imaging8896/aws-easy-use",
+        # 'Tracker': 'https://github.com/pypa/sampleproject/issues',
+    },
     packages=find_packages(exclude=["tests*"]),
     python_requires=">=3",
     install_requires=[
