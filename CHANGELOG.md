@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v0.0.3
+## v0.0.4
 
 - 2022-07-23
 - Migrate all functions
