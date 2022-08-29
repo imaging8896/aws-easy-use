@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.0.5
+
+- 2022-08-29
+- [Bugfix] Fix secret manager is secret key existed function bug
+
 ## v0.0.4
 
 - 2022-07-23
