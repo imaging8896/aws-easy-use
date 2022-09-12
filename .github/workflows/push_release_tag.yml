@@ -9,12 +9,6 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-    - name: Create GitHub release
-      uses: Roang-zero1/github-create-release-action@v2.3.2
-      with:
-        version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -31,11 +25,11 @@ jobs:
       with:
         name: aws-tool-dist
         path: dist
-    - uses: AButler/upload-release-assets@v2.0
+    - uses: ncipollo/release-action@v1
       with:
-        files:       'dist/*' # Separate by ';'
-        repo-token:  ${{ secrets.GITHUB_TOKEN }}
-        release-tag: ${{ github.ref_name }}
+        artifacts: "dist/*"
+        bodyFile:  "CHANGELOG.md"
+        token:     ${{ secrets.GITHUB_TOKEN }}
     - name: Upload pypi
       env:
         TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
