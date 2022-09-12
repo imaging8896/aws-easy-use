@@ -161,4 +161,4 @@ def is_service_attached_lb(cluster_name: str, service_name: str) -> bool:
     :rtype: bool
     """
 
-    return get_detail(cluster_name, service_name)["loadBalancers"]
+    return bool(get_detail(cluster_name, service_name)["loadBalancers"])
