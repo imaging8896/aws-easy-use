@@ -90,7 +90,7 @@ def get_deploy_type(cluster_name: str, service_name: str) -> DEPLOY_TYPE:
         return DEPLOY_TYPE.ROLLING_UPDATE
 
 
-def update_service(cluster_name: str, service_name: str, task_definition_with_rev=None, auto_rollback=False, wait_interval=5, wait_times=120, re_deploy=False) -> None:
+def update_service(cluster_name: str, service_name: str, task_definition_with_rev=None, auto_rollback=False, wait_interval=5, wait_times=120, re_deploy=False, health_check_grace_period_secs=None) -> None:
     """
     get service task definition with revision
 
@@ -113,6 +113,11 @@ def update_service(cluster_name: str, service_name: str, task_definition_with_re
             "taskDefinition": task_definition_with_rev
         }
 
+    if health_check_grace_period_secs is not None:
+        if isinstance(health_check_grace_period_secs, int) or health_check_grace_period_secs <= 0:
+            raise Exception(f"Invalid argument `health_check_grace_period_secs`. Should be greater 0 int got `{health_check_grace_period_secs}`")
+        kw["healthCheckGracePeriodSeconds"] = health_check_grace_period_secs
+
     client = boto3.client('ecs')
     response = client.update_service(
         cluster=cluster_name,
@@ -126,7 +131,6 @@ def update_service(cluster_name: str, service_name: str, task_definition_with_re
                 "rollback": auto_rollback
             }
         },
-        healthCheckGracePeriodSeconds=10,
         **kw
     )
     # TODO Check response
@@ -145,3 +149,16 @@ def update_service(cluster_name: str, service_name: str, task_definition_with_re
     assert primary_deployment["rolloutState"] == "COMPLETED", f"After waiting, primary deployment still not COMPLETED for cluster `{cluster_name}` service `{service_name}`. Got primarry deployment ```{primary_deployment}```"
     primary_deployment_cur_task_definition_with_rev = primary_deployment["taskDefinition"].split('/')[1]
     assert primary_deployment_cur_task_definition_with_rev == task_definition_with_rev, "After waiting, primary deployment still not update to task definition `{}` for cluster `{}` service `{}`. Got `{}`".format(task_definition_with_rev, cluster_name, service_name, primary_deployment["taskDefinition"])
+
+
+def is_service_attached_lb(cluster_name: str, service_name: str) -> bool:
+    """
+    Is service attached load balancer
+
+    :param str cluster_name: ECS cluster
+    :param str service_name: ECS service
+    :return: is?
+    :rtype: bool
+    """
+
+    return get_detail(cluster_name, service_name)["loadBalancers"]
