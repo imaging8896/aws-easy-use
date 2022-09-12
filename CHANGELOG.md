@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.6
+
+- 2022-09-12
+- Fix 'update_service' parameter 'healthCheckGracePeriodSeconds' not used when there is no load balancer with ECS service
+- Add ECS service 'is_service_attached_lb' function
+
 ## v0.0.5
 
 - 2022-08-29
