@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Create GitHub release
-      uses: Roang-zero1/github-create-release-action@v2
+      uses: Roang-zero1/github-create-release-action@v2.3.2
       with:
         version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$
       env:
