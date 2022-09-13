@@ -1,6 +1,6 @@
-from typing import List
+import boto3, enum
 
-import boto3, enum, time
+from .. import aws_waiter
 
 
 @enum.unique
@@ -25,7 +25,7 @@ def get_detail(cluster_name: str, service_name: str) -> dict:
     return response["services"][0]
 
 
-def get_all_lb_dns_names(cluster_name: str, service_name: str) -> List[str]:
+def get_all_lb_dns_names(cluster_name: str, service_name: str) -> list[str]:
     """
     get service all load balancer DNS names
 
@@ -135,9 +135,8 @@ def update_service(cluster_name: str, service_name: str, task_definition_with_re
     )
     # TODO Check response
 
-    waiter = client.get_waiter('services_stable')
+    waiter = aws_waiter.get_waiter_ecs_service_primary_deployment_completed()
     waiter.wait(cluster=cluster_name, services=[service_name], WaiterConfig={'Delay': wait_interval, 'MaxAttempts': wait_times})
-    time.sleep(20)
 
     service = get_detail(cluster_name, service_name)
     cur_task_definition_with_rev = service["taskDefinition"].split('/')[1]
@@ -146,7 +145,6 @@ def update_service(cluster_name: str, service_name: str, task_definition_with_re
     results = [x for x in service["deployments"] if x["status"] == "PRIMARY"]
     assert len(results) == 1, f"There is no Primary deployment for cluster `{cluster_name}` service `{service_name}`"
     primary_deployment = results[0]
-    assert primary_deployment["rolloutState"] == "COMPLETED", f"After waiting, primary deployment still not COMPLETED for cluster `{cluster_name}` service `{service_name}`. Got primarry deployment ```{primary_deployment}```"
     primary_deployment_cur_task_definition_with_rev = primary_deployment["taskDefinition"].split('/')[1]
     assert primary_deployment_cur_task_definition_with_rev == task_definition_with_rev, "After waiting, primary deployment still not update to task definition `{}` for cluster `{}` service `{}`. Got `{}`".format(task_definition_with_rev, cluster_name, service_name, primary_deployment["taskDefinition"])
 
