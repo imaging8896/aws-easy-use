@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.1.0
+
+- 2022-09-13
+- `Feature` Add customized (wait for ECS service primary deployment completed) AWS waiter to wait for complicated cases
+- `Bugfix` Fix ECS service primary deployment not completed after rolling updating it
+
 ## v0.0.6
 
 - 2022-09-12
