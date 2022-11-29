@@ -1,0 +1,3 @@
+Assume role `arn:aws:iam::102348888111:role/MockRoleSimple`
+Before assuming role, the identity is `{'UserId': 'AKIAIOSFODNN7EXAMPLE', 'Account': '102348888111', 'Arn': 'arn:aws:sts::102348888111:user/moto', 'ResponseMetadata': {'RequestId': 'c6104cbe-af31-11e0-8154-cbc7ccf896c7', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'amazon.com'}, 'RetryAttempts': 0}}`
+After assuming role, the identity is `{'UserId': 'AROARPVDYDAX4DVAIBHDV:sts-assume-role-1', 'Account': '102348888111', 'Arn': 'arn:aws:sts::102348888111:assumed-role/MockRoleSimple/sts-assume-role-1', 'ResponseMetadata': {'RequestId': 'c6104cbe-af31-11e0-8154-cbc7ccf896c7', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'amazon.com'}, 'RetryAttempts': 0}}`
