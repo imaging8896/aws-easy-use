@@ -24,7 +24,7 @@ jobs:
     - run: tox
     - run: |
         ls
-        ls allure-results
+        pwd
     - name: Get Allure history
       uses: actions/checkout@v2
       if: always()
