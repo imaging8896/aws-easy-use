@@ -35,6 +35,10 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: allure-report-artifact
+    - run: |
+        ls
+        ls .tox
+        ls .tox/allure-results
     - name: Get Allure history
       uses: actions/checkout@v2
       if: always()
