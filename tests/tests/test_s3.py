@@ -9,6 +9,9 @@ from aws_easy_use import s3
 @allure.feature("Get Object")
 @allure.story("Get Object")
 @allure.title("Get Object for '{s3_object}'")
+@allure.severity("critical")
+@allure.testcase("https://www.google.com/", 'Test case link. May be X-Ray')
+@allure.issue("https://www.google.com/", 'Issue. May be Jira ticket')
 def test_s3_get_object(s3_object):
     bucket, file_s3_path, _ = s3_object
 
