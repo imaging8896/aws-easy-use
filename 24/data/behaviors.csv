@@ -1,0 +1,7 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"","","","0","0","3","0","0"
+"AWS S3","Get Object","Read Object Content as Str","0","0","18","0","0"
+"AWS S3","Add Object","Add str file","0","0","6","0","0"
+"AWS S3","Add Object","Add file","0","0","18","0","0"
+"AWS S3","Get Object","Get Object","0","0","18","0","0"
+"AWS S3","Add Object","Add directory","0","0","2","0","0"
